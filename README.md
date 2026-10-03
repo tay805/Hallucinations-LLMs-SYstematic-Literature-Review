@@ -235,7 +235,7 @@ It aims to:
 ---
 
 ## Citation
-Tawseef Ahmed Teli, Tahir Hussain Bhat, Mirza Gazan
+Tawseef Ahmed Teli, Tahir Hussain Bhat, Mirza Ghazanfar Beg
 
 ## Status
 
