@@ -31,7 +31,7 @@ Written as yes or no tests so two screeners reach the same verdict.
 | Ex1 | Outside window | First public version before 30 Nov 2022 or after 30 Sep 2026 |
 | Ex2 | Secondary source | Review, survey, editorial, letter, opinion, tutorial |
 | Ex3 | Clinical hallucination | Hallucination in human psychology, medicine or psychiatry rather than in a model |
-| Ex4 | Detection only | The study on focuses on detection. |
+| Ex4 | Detection only | The study focuses on detection only. |
 | Ex5 | Non textual modality only | Vision, image generation or audio with no text only condition |
 | Ex6 | No empirical evaluation | No experiment of the authors' own |
 | Ex7 | Duplicate | Same study, different version. Keep the most complete |
