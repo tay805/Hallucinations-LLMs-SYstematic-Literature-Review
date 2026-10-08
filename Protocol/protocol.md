@@ -222,8 +222,6 @@ Each item scores 0 absent, 1 partial, 2 complete. Maximum 24.
 
 Bands: high 18 to 24, moderate 11 to 17, low 0 to 10.
 
-Report the per item satisfaction rate across the corpus. That table is the direct answer to RQ5.
-
 ---
 
 ## 7. Extraction codebook
@@ -250,9 +248,9 @@ Report the per item satisfaction rate across the corpus. That table is the direc
 
 Other fields: `technique_name_verbatim`, `combines_with`, `adaptivity` {none, fixed threshold, input conditioned, iterate until convergence, learned router}, `iteration_policy` {single pass, fixed N, until convergence, not_reported}, `iterations_n`, `verification_source` {self, second LLM, retrieval, external tool, none}, `access_level` {black box, grey box, white box}
 
-`access_level` carries real weight that decoding is in scope. Model preserving is not the same as black box: contrastive decoding changes no weights but needs logits, so it cannot run against a commercial endpoint. Code it on every study.
+`access_level` carries real weight that decoding is in scope. 
 
-`adaptivity` is the field carrying the third objective. Code it everywhere, including when the answer is `none`, because the count of `none` is the evidence for the gap.
+`adaptivity` is the field carrying the third objective. Will code it, including when the answer is `none`, because the count of `none` is the evidence for the gap.
 
 ### Evaluation
 `task_setting`, `domain`, `hallucination_type` {factuality, faithfulness, both}, `benchmarks_verbatim`, `benchmark_split`, `base_models_verbatim`, `metrics_verbatim`, `metric_type` {reference based, reference free, LLM as judge, human, mixed}, `judge_validated` {yes, no, not applicable}, `baseline_none_included`, `baseline_competing_methods`, `baseline_source`
@@ -270,32 +268,36 @@ Long table, one row per reported comparison: `result_id`, `study_id`, `benchmark
 
 ## 8. Synthesis and comparison plan
 
-**RQ1.** Frequency of `intervention_layer` crossed with `adaptivity` and with `access_level`. The layer by access cross tabulation is the single most informative table you will produce, because it shows which layers are actually available to deployments without weight or logit access.
+Synthesis will be narrative, supported by structured tabulation.
 
-**RQ2.** Frequency of canonical benchmarks and domains. Report how many studies use a bespoke dataset and how many evaluate on more than one benchmark.
+**RQ1.** `intervention_layer` will be cross tabulated against `adaptivity` and against `access_level`. The layer by access table is expected to be the most informative single output of the review, because it shows which intervention layers remain available to deployments that have no weight or logit access.
 
-**RQ3.** Frequency of canonical metrics by `metric_type`. Report how many use an LLM as judge without validating it against human labels.
+**RQ2.** Canonical benchmarks and domains will be tabulated by frequency. The number of studies relying on a bespoke dataset, and the number evaluating on more than one benchmark, will be reported.
 
-**RQ4, restricted comparison.** In order:
+**RQ3.** Canonical metrics will be tabulated by `metric_type`. The number of studies using an LLM as judge without validating it against human labels will be reported separately.
 
-1. Build comparability groups keyed on benchmark, split, base model and metric.
+**RQ4, restricted comparison.** The following steps will be carried out in order.
 
-2. Report head to head results only within groups containing two or more studies. State how many such groups exist and how many studies they cover.
+1. Comparability groups will be constructed, keyed on benchmark, split, base model and metric.
 
-3. Where a no mitigation baseline exists, express each result as relative change over that baseline. Relative change is comparable in direction across studies even when absolute values are not, provided you present direction and magnitude rather than a ranking.
+2. Head to head results will be reported only within groups containing two or more studies. The number of such groups, and the number of studies they cover, will be stated.
 
-4. Cross layer view: within comparable groups, compare layers rather than individual methods. This is where RQ4 earns its place, because whether decoding beats prompting is answerable at a coarser grain than whether method A beats method B.
+3. Where a no mitigation baseline is available, each result will be expressed as relative change over that baseline. Relative change remains comparable in direction across studies even where absolute values are not, provided it is presented as direction and magnitude of effect rather than as a ranking.
 
-For results outside those groups, use **vote counting by direction of effect**, reporting per layer how many studies improve, show no change, or worsen. Label it vote counting explicitly. It is an accepted method for heterogeneous evidence and it is honest, unlike an invented cross benchmark table.
+4. A cross layer view will then be taken: within comparable groups, layers will be compared rather than individual methods. This is where RQ4 earns its place, since whether decoding outperforms prompting is answerable at a coarser grain than whether one named method outperforms another.
 
-**Cost adjusted view.** Where both an outcome delta and `calls_per_query` exist, report delta per additional call. Expect few studies to support it, and report that scarcity as part of RQ5.
+For results falling outside those groups, **vote counting by direction of effect** will be used, reporting per layer how many studies improve, show no change, or worsen. This will be labelled as vote counting explicitly. It is an accepted method for heterogeneous evidence, and it is preferable to an invented cross benchmark table.
 
-**Sensitivity analyses.** Repeat RQ4 with low quality studies removed, and again with preprints removed. Report whether conclusions change.
+**Cost adjusted view.** Where both an outcome delta and `calls_per_query` are available, change in outcome per additional model call will be reported. Few studies are expected to support this, and that scarcity will itself be reported as part of RQ5.
+
+**Sensitivity analyses.** The RQ4 synthesis will be repeated with low quality studies removed, and again with preprints removed. Whether the conclusions change under either condition will be reported.
 
 ---
 
 ## 9. Reporting
-PRISMA 2020. Flow diagram with counts at identification, deduplication, title and abstract screening, full text assessment with reasons by criterion ID, and inclusion. Report Cohen kappa for both stages, the search validation test from 4.1, and the number excluded by the retrieval boundary test in 2.1. State that the protocol was fixed before screening began.
+
+Reporting will follow PRISMA 2020. A flow diagram will be presented with counts at identification, deduplication, title and abstract screening, full text assessment with reasons given by criterion ID, and inclusion. Cohen kappa will be reported for both screening stages, together with the outcome of the search validation test described in Section 4.1 and the number of records excluded by the retrieval boundary test in Section 2.1. It will be stated that the protocol was fixed before screening began.
+
 
 ---
 
