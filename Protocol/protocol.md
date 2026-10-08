@@ -33,6 +33,7 @@ Window: 30 November 2022 to 30 September 2026.
 | Ex5 | Non textual modality only | Vision, image generation or audio with no text only condition |
 | Ex6 | No empirical evaluation | No experiment of the authors' own |
 | Ex7 | Duplicate | Same study, different version. Keep the most complete |
+| Ex8 | Indexing | Not indexed in SCI or Scopus |
 
 ### 2.1 The retrieval boundary
 
