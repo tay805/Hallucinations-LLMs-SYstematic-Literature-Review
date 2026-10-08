@@ -31,7 +31,7 @@ Written as yes or no tests so two screeners reach the same verdict.
 | Ex1 | Outside window | First public version before 30 Nov 2022 or after 30 Sep 2026 |
 | Ex2 | Secondary source | Review, survey, editorial, letter, opinion, tutorial |
 | Ex3 | Clinical hallucination | Hallucination in human psychology, medicine or psychiatry rather than in a model |
-| Ex4 | Detection only | No component changes the model output. See 2.2 |
+| Ex4 | Detection only | The study on focuses on detection. |
 | Ex5 | Non textual modality only | Vision, image generation or audio with no text only condition |
 | Ex6 | No empirical evaluation | No experiment of the authors' own |
 | Ex7 | Duplicate | Same study, different version. Keep the most complete |
@@ -48,7 +48,7 @@ Retrieval augmented generation is in scope and it is a very large field. This te
 This keeps retrieval methods that target hallucination and removes the general RAG literature that merely nods at it. Record the count excluded by this test separately, because reviewers will ask how you bounded the scope.
 
 ### 2.2 Detection only papers
-Ex4 removes them from the corpus. Keep a separate **signal register** of detection papers that supply a risk or confidence signal computable without weight access. Screen those on I1, I2 and Ex1 only, record signal type and cost, and exclude them from all synthesis. Declare it in the paper as a deliberate secondary collection. The reason is practical: RQ3 asks which metrics are used and detection work defines most of them, and a risk signal is the input any adaptive method would need.
+Ex4 removes papers that only focuses on the detection of hallacinations in LLMs from the corpus.
 
 ### 2.3 The hybrid case Ex6 leaves open
 Your wording excludes papers focused "exclusively" on training or fine tuning, which does not say what to do with a paper that combines fine tuning and an inference time method. Operational test:
