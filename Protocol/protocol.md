@@ -57,8 +57,8 @@ Your wording excludes papers focused "exclusively" on training or fine tuning, w
 
 This keeps a paper whose main claim is an inference time method with an optional tuned variant, and removes one whose main claim requires tuning.
 
-### 2.4 Preprints (adopted decision)
-A preprint is included only where no peer reviewed version of the same study exists. Where both exist, the peer reviewed version is kept and the preprint is removed under Ex8. Every included preprint is flagged in `venue_type`, and Section 8 runs a sensitivity analysis with preprints removed. Excluding preprints outright would remove foundational work on this topic, so a blanket exclusion is not used.
+### 2.4 Preprints
+A preprint is included only where no peer reviewed version of the same study exists. Where both exist, the peer reviewed version is kept and the preprint is removed under Ex7. Every included preprint is flagged in `venue_type`, and Section 8 runs a sensitivity analysis with preprints removed. Excluding preprints outright would remove foundational work on this topic, so a blanket exclusion is not used.
 
 ---
 
@@ -71,8 +71,8 @@ Record for every source: platform, exact string, field tags, date limits, search
 
 ---
 
-## 4. Corrected search strings
-Three blocks: Population AND Problem AND Intervention. The intervention block now covers all five layers.
+## 4. Search strings
+Three blocks: Population AND Problem AND Intervention. The intervention block covers all five layers.
 
 **Scopus**
 
@@ -154,8 +154,6 @@ AND ("2022/11/30"[Date - Publication] : "2026/09/30"[Date - Publication])
 
 ```
 
-The population block no longer accepts a bare hallucination term. That single change is what stops the psychiatry flood at source, and it makes Ex3 a safety net rather than your main defence.
-
 **IEEE Xplore**
 
 ```
@@ -178,8 +176,6 @@ AND ("Abstract":"prompt\*" OR "Abstract":"training-free" OR "Abstract":"inferenc
 
 ```
 
-Abstract rather than All Metadata, so precision is comparable with the other sources. If recall looks low, rerun on All Metadata and report both counts.
-
 **ACM Digital Library** — the same three blocks with `Abstract:` prefixes.
 
 **ACL Anthology, DBLP or Semantic Scholar**
@@ -196,21 +192,12 @@ AND (prompting OR "training-free" OR "inference-time" OR decoding OR "contrastiv
 
 ```
 
-**Lens.org and Springer** — the Scopus form, with straight quotation marks only. Your Lens string currently has curly quotation marks around `"hallucination\*"` and will be rejected as written.
-
-### 4.1 Validate before running at scale
-Choose six papers you already know belong, one per intervention layer: a prompting method, a sampling or consistency method, a contrastive decoding method, a retrieval grounding method, a chain of verification method, and an abstention method. Every corrected string must return all six. A string that misses one is wrong, not the paper. Record the test in the search log, since reviewers increasingly ask for it.
-
----
-
 ## 5. Screening
-**Stage 1, title and abstract.** Apply I1, I2, I4 and Ex1, Ex2, Ex3, Ex5, Ex8 only. When in doubt, advance the record. Over inclusion here is cheap; over exclusion is permanent and invisible.
+**Stage 1, title and abstract.** Apply I1, I2, I4 and Ex1, Ex2, Ex3, Ex5, Ex7 only. When in doubt, advance the record. Over inclusion here is cheap; over exclusion is permanent and invisible.
 
 **Stage 2, full text.** Apply everything, including the retrieval boundary test in 2.1 and the hybrid test in 2.3. Record exactly one exclusion reason per excluded paper, using the criterion ID rather than free text, because PRISMA needs the counts tabulated.
 
 **Agreement.** Both screeners independently screen a random 20 percent at each stage. Compute Cohen kappa and report it. Below 0.70, stop, rewrite the criterion that caused the disagreement, and rescreen. Resolve conflicts by discussion, with a third party only for deadlock.
-
-**Snowballing.** After Stage 2, backward snowball the reference lists of all included papers and of the surveys excluded under Ex2, which is the one good use for that material. Forward snowball the five most cited included papers. Run new candidates through both stages and report them separately in the flow diagram.
 
 ---
 
