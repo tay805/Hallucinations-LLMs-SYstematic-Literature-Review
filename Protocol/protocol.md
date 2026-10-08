@@ -1,8 +1,7 @@
 # Protocol: Systematic Review of Training Free and Model Preserving Hallucination Mitigation in LLMs
-Window: 30 November 2022 to 30 September 2026. Fixed before screening. Changes after that point go in the amendments log, Section 10.
+Window: 30 November 2022 to 30 September 2026.
 
 ## 1. Research questions
-Revised to match the broadened scope. Changed wording is in bold.
 
 | RQ | Question | Answered from |
 |---|---|---|
@@ -13,7 +12,6 @@ Revised to match the broadened scope. Changed wording is in bold.
 | RQ5 | What are the primary methodological limitations and open research gaps in the **training free mitigation** literature? | Quality appraisal plus RQ1 to RQ4 |
 
 ## 2. Eligibility criteria
-Written as yes or no tests so two screeners reach the same verdict.
 
 ### Include if all are true
 | ID | Criterion | Operational test |
@@ -37,172 +35,172 @@ Written as yes or no tests so two screeners reach the same verdict.
 | Ex7 | Duplicate | Same study, different version. Keep the most complete |
 
 ### 2.1 The retrieval boundary
-Retrieval augmented generation is in scope and it is a very large field. This test is binding from the first screened record:
 
-> **Include** a retrieval paper only if reducing hallucination, factual error or unfaithfulness is stated as a goal in the title, abstract or introduction, **and** at least one reported outcome is a hallucination, factuality or faithfulness metric.
+**Include** a retrieval paper only if reducing hallucination, factual error or unfaithfulness is stated as a goal in the title, abstract or introduction, **and** at least one reported outcome is a hallucination, factuality or faithfulness metric.
 
->
-
-> **Exclude** retrieval papers whose outcomes are only answer accuracy, exact match, retrieval recall, MAP, NDCG or latency, even where hallucination is mentioned in passing.
-
-This keeps retrieval methods that target hallucination and removes the general RAG literature that merely nods at it. Record the count excluded by this test separately, because reviewers will ask how you bounded the scope.
+**Exclude** retrieval papers whose outcomes are only answer accuracy, exact match, retrieval recall, MAP, NDCG or latency, even where hallucination is mentioned in passing.
 
 ### 2.2 Detection only papers
 Ex4 removes papers that only focuses on the detection of hallacinations in LLMs from the corpus.
 
-### 2.3 The hybrid case Ex6 leaves open
-Your wording excludes papers focused "exclusively" on training or fine tuning, which does not say what to do with a paper that combines fine tuning and an inference time method. Operational test:
-
-> Ask whether the headline result can be reproduced with no gradient update. If yes, include, and code the tuned variant as out of scope context. If no, exclude under Ex6.
-
-This keeps a paper whose main claim is an inference time method with an optional tuned variant, and removes one whose main claim requires tuning.
-
-### 2.4 Preprints
-A preprint is included only where no peer reviewed version of the same study exists. Where both exist, the peer reviewed version is kept and the preprint is removed under Ex7. Every included preprint is flagged in `venue_type`, and Section 8 runs a sensitivity analysis with preprints removed. Excluding preprints outright would remove foundational work on this topic, so a blanket exclusion is not used.
+### 2.3 Preprints
+A preprint is included only where no peer reviewed version of the same study exists. Where both exist, the peer reviewed version is kept and the preprint is removed under Ex7. Every included preprint is flagged in `venue_type`, and Section 8 runs a sensitivity analysis with preprints removed.
 
 ---
 
 ## 3. Information sources
-Your eight, plus two.
 
-Add **arXiv** through Semantic Scholar, subject to the preprint rule. Add **DBLP or Semantic Scholar** for proper coverage of ACL, EMNLP, NAACL, COLING and NeurIPS, since ACL Anthology search alone is weak and the conference literature carries most of the decoding and verification work now in scope.
-
-Record for every source: platform, exact string, field tags, date limits, search date, hits, exported count.
+IEEE Xplore
+ACM DL
+Lens.org
+Springer
+ACL Anthology
+DBLP or Semantic Scholar
+arXiv
 
 ---
 
-## 4. Search strings
-Three blocks: Population AND Problem AND Intervention. The intervention block covers all five layers.
+## 4. Search Strategy: Strings and Execution Plan
 
-**Scopus**
+Seven sources will be searched for studies published between 30 November 2022 and 30 September 2026. Each string below translates the same three concept blocks, Population AND Problem AND Intervention, into the syntax accepted by the platform in question. For every source, the exact string, the date of the search, the settings applied, the hit count and the number exported will be recorded in the log at the end.
 
-```
+---
 
-TITLE-ABS-KEY (
+## 1. IEEE Xplore
 
- ("large language model\*" OR "language model\*" OR "LLM" OR "LLMs" OR "ChatGPT" OR "GPT-4"
+Command Search will be used from the Advanced Search page. Because IEEE rejects grouped terms inside a field, three searches will be run and combined in Search History rather than submitting a single string.
 
-  OR "instruction-tuned model\*" OR "generative AI")
-
- AND ("hallucinat\*" OR "factual\*" OR "faithful\*" OR "fabricat\*" OR "confabulat\*"
-
-      OR "groundedness" OR "semantic consistency")
-
- AND ("prompt\*" OR "training-free" OR "inference-time" OR "decoding-time" OR "test-time"
-
-      OR "contrastive decoding" OR "constrained decoding" OR "decoding strateg\*"
-
-      OR "retrieval-augmented" OR "retrieval augmented generation" OR "RAG"
-
-      OR "knowledge graph" OR "grounding" OR "self-refine\*" OR "self-correct\*"
-
-      OR "self-consistency" OR "self-check\*" OR "self-verification"
-
-      OR "chain-of-verification" OR "chain of verification" OR "verification"
-
-      OR "re-prompt\*" OR "critic" OR "abstention" OR "uncertainty-aware" OR "post-hoc correction")
-
-) AND PUBYEAR > 2021 AND PUBYEAR < 2027
+**Search #1, Population AND Problem**
 
 ```
-
-**Web of Science**
-
+("Abstract":"large language model" OR "Abstract":"language model" OR "Abstract":LLM OR "Abstract":ChatGPT OR "Document Title":"large language model" OR "Document Title":LLM) AND ("Abstract":hallucinat* OR "Abstract":factual* OR "Abstract":faithful* OR "Abstract":groundedness OR "Document Title":hallucinat*)
 ```
 
-TS=(
-
- ("large language model\*" OR "language model\*" OR "LLM" OR "LLMs" OR "ChatGPT")
-
- AND ("hallucinat\*" OR "factual\*" OR "faithful\*" OR "fabricat\*" OR "confabulat\*" OR "groundedness")
-
- AND ("prompt\*" OR "training-free" OR "inference-time" OR "decoding-time" OR "contrastive decoding"
-
-      OR "constrained decoding" OR "retrieval-augmented" OR "RAG" OR "knowledge graph" OR "grounding"
-
-      OR "self-refine\*" OR "self-correct\*" OR "self-consistency" OR "self-check\*"
-
-      OR "chain-of-verification" OR "self-verification" OR "abstention" OR "uncertainty-aware")
-
-)
+**Search #2, Intervention at prompt, sampling and verification layers**
 
 ```
-
-Apply the 2022 to 2026 limit in the interface, and refine out clinical categories if the platform offers it.
-
-**PubMed**
-
+"Abstract":prompt* OR "Abstract":"training-free" OR "Abstract":"inference-time" OR "Abstract":"self-refine" OR "Abstract":"self-correction" OR "Abstract":"self-consistency" OR "Abstract":"self-verification" OR "Abstract":"chain-of-verification" OR "Abstract":verification
 ```
 
-("large language model\*"[tiab] OR "LLM"[tiab] OR "ChatGPT"[tiab] OR "GPT-4"[tiab]
-
- OR "generative artificial intelligence"[tiab])
-
-AND ("hallucinat\*"[tiab] OR "factual\*"[tiab] OR "faithful\*"[tiab] OR "fabricat\*"[tiab]
-
-     OR "confabulat\*"[tiab])
-
-AND ("prompt\*"[tiab] OR "training-free"[tiab] OR "inference-time"[tiab] OR "decoding"[tiab]
-
-     OR "retrieval-augmented"[tiab] OR "RAG"[tiab] OR "grounding"[tiab] OR "self-refine\*"[tiab]
-
-     OR "self-correct\*"[tiab] OR "self-consistency"[tiab] OR "chain-of-verification"[tiab]
-
-     OR "verification"[tiab] OR "abstention"[tiab])
-
-AND ("2022/11/30"[Date - Publication] : "2026/09/30"[Date - Publication])
+**Search #3, Intervention at decoding, retrieval and abstention layers**
 
 ```
-
-**IEEE Xplore**
-
+"Abstract":decoding OR "Abstract":"contrastive decoding" OR "Abstract":"retrieval-augmented" OR "Abstract":RAG OR "Abstract":"knowledge graph" OR "Abstract":grounding OR "Abstract":abstention OR "Abstract":"uncertainty-aware"
 ```
 
-("Abstract":"large language model\*" OR "Abstract":"LLM" OR "Abstract":"ChatGPT")
+These will be combined as `#1 AND (#2 OR #3)`, with the year range set to 2022 through 2026. Since IEEE filters by publication year only, records falling outside the exact window will be removed during screening.
 
-AND ("Abstract":"hallucinat\*" OR "Abstract":"factual\*" OR "Abstract":"faithful\*"
+---
 
-     OR "Abstract":"groundedness")
+## 2. ACM Digital Library
 
-AND ("Abstract":"prompt\*" OR "Abstract":"training-free" OR "Abstract":"inference-time"
-
-     OR "Abstract":"decoding" OR "Abstract":"retrieval-augmented" OR "Abstract":"RAG"
-
-     OR "Abstract":"grounding" OR "Abstract":"self-refine\*" OR "Abstract":"self-correct\*"
-
-     OR "Abstract":"self-consistency" OR "Abstract":"chain-of-verification"
-
-     OR "Abstract":"verification" OR "Abstract":"abstention")
+An initial search will be run, after which Edit Search and View Query Syntax will be opened so that the following can be pasted into Edit Query.
 
 ```
-
-**ACM Digital Library** — the same three blocks with `Abstract:` prefixes.
-
-**ACL Anthology, DBLP or Semantic Scholar**
-
+(Title:("large language model" OR "language model" OR LLM OR ChatGPT) OR Abstract:("large language model" OR "language model" OR LLM OR ChatGPT)) AND (Title:(hallucinat* OR factual* OR faithful*) OR Abstract:(hallucinat* OR factual* OR faithful* OR groundedness)) AND Abstract:(prompt* OR "training-free" OR "inference-time" OR decoding OR "contrastive decoding" OR "retrieval-augmented" OR RAG OR "knowledge graph" OR grounding OR "self-refine" OR "self-correction" OR "self-consistency" OR "self-verification" OR "chain-of-verification" OR verification OR abstention)
 ```
 
-("large language model" OR LLM) AND (hallucination OR factuality OR faithfulness OR groundedness)
+The Publication Date range will be set to November 2022 through September 2026. The ACM Guide to Computing Literature will be searched rather than the ACM full text collection, so that non ACM publishers are included, and the collection used will be recorded.
 
-AND (prompting OR "training-free" OR "inference-time" OR decoding OR "contrastive decoding"
+---
 
-     OR "retrieval-augmented" OR grounding OR "self-refinement" OR "self-correction"
+## 3. Lens.org
 
-     OR "self-consistency" OR "chain-of-verification" OR "self-verification" OR abstention)
+Stemming will be turned off under Query Tools before the search is run, because Lens does not stem wildcard terms and leaving stemming on would produce inconsistent matching. This setting will be reported.
 
 ```
+(title:("large language model" OR "large language models" OR LLM OR ChatGPT) OR abstract:("large language model" OR "large language models" OR LLM OR ChatGPT)) AND (title:(hallucinat* OR factual* OR faithful*) OR abstract:(hallucinat* OR factual* OR faithful* OR fabricat* OR groundedness)) AND abstract:(prompt* OR "training-free" OR "inference-time" OR decoding OR "contrastive decoding" OR "retrieval-augmented" OR RAG OR "knowledge graph" OR grounding OR "self-refine" OR "self-correction" OR "self-consistency" OR "self-verification" OR "chain-of-verification" OR verification OR abstention) AND date_published:[2022-11-30 TO 2026-09-30]
+```
+
+Export will be performed from a signed in account, since anonymous accounts are capped at 1,000 records.
+
+---
+
+## 4. Springer Nature Link
+
+Springer offers no abstract only field, and its Keywords field searches full text. Two searches will therefore be run, the first of which will be reported as primary.
+
+**Run A, pasted into the Title box**
+
+```
+("large language model" OR "large language models" OR "LLM" OR "ChatGPT") AND ("hallucination" OR "hallucinations" OR "factual consistency" OR "faithfulness")
+```
+
+**Run B, pasted into the Keywords box**
+
+```
+("large language model" OR "LLM") AND ("hallucination" OR "hallucinations") AND ("prompting" OR "training-free" OR "decoding" OR "retrieval-augmented" OR "self-consistency" OR "verification" OR "abstention")
+```
+
+Date Published will be set to 30 November 2022 through 30 September 2026. Run B is expected to be noisy because it reaches body text, and Springer will accordingly be reported as a title level search with a supplementary full text pass. Where a result set exceeds 1,000 it will be split by year, since the CSV export is capped at that figure and no batch RIS export exists.
+
+---
+
+## 5. ACL Anthology
+
+The Anthology's site search is a Google Programmable Search Engine, so it returns a ranked and capped list rather than a Boolean result set, and it offers no export. It will be used only for orientation, with the following terms.
+
+```
+hallucination mitigation large language model prompting decoding retrieval verification
+```
+
+For the reportable search, `anthology+abstracts.bib.gz` will be downloaded, the download date and file hash recorded, and the file filtered locally with a scripted equivalent of the Boolean string. The script will be archived as supplementary material. This source will be reported in PRISMA under other methods and registers.
+
+---
+
+## 6. DBLP
+
+DBLP indexes titles, authors and venues only, uses prefix matching by default, and has phrase search and NOT disabled. It will be treated as a supplementary source for computer science venue coverage, searched with three short queries.
+
+```
+hallucinat llm|language
+```
+
+```
+hallucinat mitigat|detect
+```
+
+```
+faithful|factual llm|language
+```
+
+Because DBLP offers no date parameter and caps results at 1,000, the year field will be filtered after export.
+
+---
+
+## 7. Semantic Scholar
+
+The website search box ignores Boolean operators, so the bulk endpoint will be queried directly by pasting the following into the browser address bar.
+
+```
+https://api.semanticscholar.org/graph/v1/paper/search/bulk?query=%28%22large+language+model%22+%7C+%22large+language+models%22+%7C+LLM+%7C+ChatGPT%29+%2B+%28hallucination+%7C+hallucinations+%7C+faithfulness+%7C+%22factual+consistency%22+%7C+groundedness%29+%2B+%28prompting+%7C+%22training-free%22+%7C+%22inference-time%22+%7C+decoding+%7C+%22retrieval-augmented%22+%7C+grounding+%7C+%22self-refine%22+%7C+%22self-correction%22+%7C+%22self-consistency%22+%7C+%22chain-of-verification%22+%7C+verification+%7C+abstention%29&publicationDateOrYear=2022-11-30:2026-09-30&fields=title,abstract,year,venue,externalIds
+```
+
+The response carries a continuation `token`, which will be appended as `&token=<value>` to retrieve each further batch of 1,000. The returned JSON will be converted to RIS for screening, and the raw JSON archived.
+
+---
+
+## 8. arXiv
+
+The arXiv API will be queried directly, since the web interface offers no bulk export. The API supports no wildcards, so every variant has been spelled out.
+
+```
+http://export.arxiv.org/api/query?search_query=%28cat:cs.CL+OR+cat:cs.AI+OR+cat:cs.LG%29+AND+%28abs:%22large+language+model%22+OR+abs:%22large+language+models%22+OR+abs:LLM+OR+abs:ChatGPT%29+AND+%28abs:hallucination+OR+abs:hallucinations+OR+abs:faithfulness+OR+abs:%22factual+consistency%22+OR+abs:factuality%29+AND+%28abs:prompting+OR+abs:%22training-free%22+OR+abs:%22inference-time%22+OR+abs:decoding+OR+abs:%22retrieval-augmented%22+OR+abs:grounding+OR+abs:%22self-correction%22+OR+abs:%22self-consistency%22+OR+abs:%22chain-of-verification%22+OR+abs:verification+OR+abs:abstention%29+AND+submittedDate:%5B202211300000+TO+202609302359%5D&start=0&max_results=200
+```
+
+Paging will proceed by increasing `start` in steps of 200, with three seconds between requests as arXiv's terms require. An arXiv record will be retained only where no peer reviewed version of the same study exists, and every retained preprint will be flagged so that it can be removed in the sensitivity analysis.
 
 ## 5. Screening
-**Stage 1, title and abstract.** Apply I1, I2, I4 and Ex1, Ex2, Ex3, Ex5, Ex7 only. When in doubt, advance the record. Over inclusion here is cheap; over exclusion is permanent and invisible.
+**Stage 1, title and abstract.** Two reviewers will independently review each article and inlcude it only when both reach the consensus. In case of a disagreement, third reviewer will make the final decision.
 
-**Stage 2, full text.** Apply everything, including the retrieval boundary test in 2.1 and the hybrid test in 2.3. Record exactly one exclusion reason per excluded paper, using the criterion ID rather than free text, because PRISMA needs the counts tabulated.
+**Stage 2, full text.** Expert Reviewer will inlude or excludes a study. Record exactly one exclusion reason per excluded paper, using the criterion ID.
 
 **Agreement.** Both screeners independently screen a random 20 percent at each stage. Compute Cohen kappa and report it. Below 0.70, stop, rewrite the criterion that caused the disagreement, and rescreen. Resolve conflicts by discussion, with a third party only for deadlock.
 
 ---
 
 ## 6. Quality appraisal
-Scored for every included study. Used for sensitivity analysis and for RQ5. Never an eligibility filter.
+Scored for every included study. Used for sensitivity analysis and for RQ5.
 
 Each item scores 0 absent, 1 partial, 2 complete. Maximum 24.
 
@@ -223,12 +221,11 @@ Each item scores 0 absent, 1 partial, 2 complete. Maximum 24.
 
 Bands: high 18 to 24, moderate 11 to 17, low 0 to 10.
 
-Q2, Q8, Q11 and Q12 are the ones that usually fail. Report the per item satisfaction rate across the corpus, not just totals. That table is the direct answer to RQ5. Q12 matters particularly now that decoding methods are in scope, because a method needing logit access cannot run against a commercial endpoint, and papers seldom say so.
+Report the per item satisfaction rate across the corpus. That table is the direct answer to RQ5.
 
 ---
 
 ## 7. Extraction codebook
-One record per study. Every value traced to a section, table or page. Absent values recorded as `not_reported`, never inferred. Record names verbatim at extraction; canonicalise once, globally, afterwards.
 
 ### Identification
 `study_id`, `citation`, `year`, `venue`, `venue_type` {journal, conference, workshop, preprint}, `doi_or_url`
@@ -252,9 +249,9 @@ One record per study. Every value traced to a section, table or page. Absent val
 
 Other fields: `technique_name_verbatim`, `combines_with`, `adaptivity` {none, fixed threshold, input conditioned, iterate until convergence, learned router}, `iteration_policy` {single pass, fixed N, until convergence, not_reported}, `iterations_n`, `verification_source` {self, second LLM, retrieval, external tool, none}, `access_level` {black box, grey box, white box}
 
-`access_level` carries real weight now that decoding is in scope. Model preserving is not the same as black box: contrastive decoding changes no weights but needs logits, so it cannot run against a commercial endpoint. Code it on every study.
+`access_level` carries real weight that decoding is in scope. Model preserving is not the same as black box: contrastive decoding changes no weights but needs logits, so it cannot run against a commercial endpoint. Code it on every study.
 
-`adaptivity` is the field carrying your third objective. Code it everywhere, including when the answer is `none`, because the count of `none` is the evidence for the gap.
+`adaptivity` is the field carrying the third objective. Code it everywhere, including when the answer is `none`, because the count of `none` is the evidence for the gap.
 
 ### Evaluation
 `task_setting`, `domain`, `hallucination_type` {factuality, faithfulness, both}, `benchmarks_verbatim`, `benchmark_split`, `base_models_verbatim`, `metrics_verbatim`, `metric_type` {reference based, reference free, LLM as judge, human, mixed}, `judge_validated` {yes, no, not applicable}, `baseline_none_included`, `baseline_competing_methods`, `baseline_source`
@@ -271,7 +268,6 @@ Long table, one row per reported comparison: `result_id`, `study_id`, `benchmark
 ---
 
 ## 8. Synthesis and comparison plan
-Narrative synthesis with structured tabulation. No meta-analysis: the outcome measures are not commensurable and pooling them would misrepresent the evidence.
 
 **RQ1.** Frequency of `intervention_layer` crossed with `adaptivity` and with `access_level`. The layer by access cross tabulation is the single most informative table you will produce, because it shows which layers are actually available to deployments without weight or logit access.
 
