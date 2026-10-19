@@ -1,5 +1,6 @@
 # Protocol: Systematic Review of Training Free and Model Preserving Hallucination Mitigation in LLMs
 Window: 30 November 2022 to 30 September 2026.
+Zenodo: https://doi.org/10.5281/zenodo.23470068
 
 ## 1. Research questions
 
